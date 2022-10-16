@@ -1,0 +1,1 @@
+const { User, Reaction, Thoughts } = require('../models');
