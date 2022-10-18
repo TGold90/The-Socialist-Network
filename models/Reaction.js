@@ -23,6 +23,6 @@ const reactionSchema = new Schema(
             get: timestamp => dateFormat(timestamp),
         },
     }
-)
+);
 
 module.exports = reactionSchema;

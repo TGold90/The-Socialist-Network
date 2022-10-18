@@ -15,13 +15,14 @@ const userSchema = new Schema(
             unique: true,
             match: `/.+\@.+\..+/`,
         },
-        //will add in the thoughts model
+        //populates all thoughts -- one to many
         thoughts: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Thoughts",
             }
         ],
+        //populates friends of user -- one to many
         friends: [
             {
                 type: Schema.Types.ObjectId,
