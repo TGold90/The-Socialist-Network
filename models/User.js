@@ -13,7 +13,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            match: `/.+\@.+\..+/`,
+            match: [/.+\@.+\..+/],
         },
         //populates all thoughts -- one to many
         thoughts: [
