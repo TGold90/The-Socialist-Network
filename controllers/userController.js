@@ -3,9 +3,10 @@ const { User, Reaction, Thoughts } = require('../models');
 
 module.exports = {
     //GET ALL USERS
+    //THOUGHTS ARE NOT PROPERLY POPULATING
     async getUsers(req, res) {
         try {
-            const allUsers = await User.find();
+            const allUsers = await User.find().select('-__v');
             res.json(allUsers);
         }
         catch (err) {
@@ -15,7 +16,7 @@ module.exports = {
     //CREATE NEW USER
     async createNewUser(req, res) {
         try {
-            const newUser = await User.create(req.body);
+            const newUser = await User.create(req.body).populate('thoughts').populate('friends');
             res.json(newUser);
             console.log(newUser);
         } catch (err) {
@@ -23,10 +24,11 @@ module.exports = {
         }
     },
     //GET USER BY ID
+    //THOUGHTS ARE NOT PROPERLY POPULATING
     async getUserById(req, res) {
         console.log(req.params.userId);
         try {
-            const singleUser = await (await (await User.findOne({ _id: req.params.userId })).populate('thoughts')).populate('friends');
+            const singleUser = await User.findOne({ _id: req.params.userId }).select('-__v').populate('thoughts').populate('friends');
             res.json(singleUser);
         } catch (err) {
             res.status(500).json(err.message);
@@ -35,7 +37,6 @@ module.exports = {
     //UPDATE USER BY ID
     async updateUser(req, res) {
         try {
-            // i think the filter is not quite right. see { _id: ObjectId(req.body.id) }, from activity 6
             const changedUser = await User.findOneAndUpdate(
                 { _id: req.params.userId }, { $set: req.body }, { returnDocument: "after" });
             res.json(changedUser);
