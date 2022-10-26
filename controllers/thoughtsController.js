@@ -1,5 +1,6 @@
 const res = require('express/lib/response');
 const { User, Reaction, Thoughts } = require('../models');
+const { ObjectId } = require('mongoose');
 
 module.exports = {
     //GET ALL THOUGHTS
@@ -17,12 +18,24 @@ module.exports = {
     async createNewThought(req, res) {
         try {
             const newThought = await Thoughts.create(req.body);
+            await User.findByIdAndUpdate(req.body.userId,
+                { $addToSet: { thoughts: newThought._id } },
+                { new: true });
             res.json(newThought);
             console.log(newThought);
         } catch (err) {
             res.status(500).json(err.message);
         }
     },
+    // async createNewThought(req, res) {
+    //     try {
+            
+    //         res.json(newThought);
+    //         console.log(newThought);
+    //     } catch (err) {
+    //         res.status(500).json(err.message);
+    //     }
+    // },
     //GET THOUGHT BY ID
     async getThoughtById(req, res) {
         try {
@@ -61,7 +74,7 @@ module.exports = {
     async addReaction(req, res) {
         try {
             const newReaction = await Thoughts.findByIdAndUpdate( 
-                { _id: req.params.thoughtId },
+                req.params.thoughtId,
                 { $addToSet: { reactions: req.body } },
                 { new: true });
             res.json(newReaction);
@@ -73,8 +86,8 @@ module.exports = {
     async removeReaction(req, res) {
         try {
             const killReaction = await Thoughts.findByIdAndUpdate(
-                {_id: req.params.thoughtId }, 
-                { $pull: { reactions: { reactionId: req.params.reactionId } } }, 
+                req.params.thoughtId, 
+                { $pull: { reactions: req.params.reactionId } }, 
                 { new: true });
             res.json(killReaction);
         } catch (err) {

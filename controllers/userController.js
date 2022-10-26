@@ -6,7 +6,7 @@ module.exports = {
     //THOUGHTS ARE NOT PROPERLY POPULATING
     async getUsers(req, res) {
         try {
-            const allUsers = await User.find().select('-__v');
+            const allUsers = await User.find().select('-__v').populate('thoughts').populate('friends');
             res.json(allUsers);
         }
         catch (err) {

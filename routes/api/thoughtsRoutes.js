@@ -11,7 +11,9 @@ const {
 const router = require('express').Router();
 
 //get all thoughts - create new thought
-router.route('/').get(getThoughts).post(createNewThought);
+router.route('/').get(getThoughts).post(createNewThought);;
+
+// router.route('/:userId').post(createNewThought);
 
 //get thought by ID - update thought - delete thought
 router.route('/:thoughtId').get(getThoughtById).put(updateThought).delete(deleteThought);
@@ -21,5 +23,7 @@ router.route('/:thoughtId/reactions').post(addReaction);
 
 //add reaction to thought - delete reaction
 router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
+
+// thoughts not populating and removeReaction funciton getting "wrong route"
 
 module.exports = router;
