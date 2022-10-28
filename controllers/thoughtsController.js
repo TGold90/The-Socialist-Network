@@ -87,7 +87,7 @@ module.exports = {
         try {
             const killReaction = await Thoughts.findByIdAndUpdate(
                 req.params.thoughtId, 
-                { $pull: { reactions: req.params.reactionId } }, 
+                { $pull: { reactions: { reactionId: req.params.reactionId } } }, 
                 { new: true });
             res.json(killReaction);
         } catch (err) {
