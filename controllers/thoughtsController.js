@@ -27,15 +27,6 @@ module.exports = {
             res.status(500).json(err.message);
         }
     },
-    // async createNewThought(req, res) {
-    //     try {
-            
-    //         res.json(newThought);
-    //         console.log(newThought);
-    //     } catch (err) {
-    //         res.status(500).json(err.message);
-    //     }
-    // },
     //GET THOUGHT BY ID
     async getThoughtById(req, res) {
         try {

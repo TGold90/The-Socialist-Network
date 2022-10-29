@@ -22,6 +22,5 @@ router.route('/:thoughtId/reactions').post(addReaction);
 //add reaction to thought - delete reaction
 router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
 
-// thoughts not populating and removeReaction funciton getting "wrong route"
 
 module.exports = router;
