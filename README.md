@@ -87,7 +87,7 @@ Distributed under the mit License. See [LICENSE.txt](LICENSE.txt) for more infor
  Tom Gold
 
 
-Project Link: [https://github.com/RP-LITE/awesome-schedule](https://github.com/RP-LITE/awesome-schedule)
+Project Link: [https://github.com/TGold90/The-Socialist-Network](https://github.com/TGold90/The-Socialist-Network)
 <p align="right">(<a href="#top">back to top</a>)</p>
 <!-- ACKNOWLEDGMENTS -->
 
